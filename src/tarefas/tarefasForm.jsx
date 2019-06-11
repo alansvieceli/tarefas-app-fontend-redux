@@ -1,8 +1,11 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { bindActionCreators } from 'redux'
 
 import Grid from '../template/grid'
 import IconButton from '../template/iconButton'
+
+import { changeDescricao } from './tarefasActions'
 
 const tarefasForm = props => {
 
@@ -20,7 +23,7 @@ const tarefasForm = props => {
             <Grid cols="12 9 10">
                 <input id="descricao" className="form-control" 
                     placeholder="Adicione uma tarefa"
-                    onChange={props.handleChange}
+                    onChange={props.changeDescricao}
                     onKeyUp={keyHandle}
                     value={props.descricao}/>                
             </Grid>
@@ -35,6 +38,7 @@ const tarefasForm = props => {
 
 
 const mapStateToProps = state => ({descricao: state.tarefa.descricao})
+const mapDispatchToProps = dispatch => bindActionCreators({changeDescricao} , dispatch)
 
 //padrão de projeto, decorator
-export default connect(mapStateToProps)(tarefasForm)
+export default connect(mapStateToProps, mapDispatchToProps)(tarefasForm)

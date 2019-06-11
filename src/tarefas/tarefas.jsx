@@ -78,8 +78,7 @@ export default class Tarefa extends Component {
                     handleAdd={this.handleAdd} 
                     handleSearch={this.handleSearch} 
                     handleClear={this.handleClear} />
-                <TarefasLista 
-                    lista={this.state.lista}
+                <TarefasLista                     
                     handleRemove={this.handleRemove}
                     handleMarkAsDone={this.handleMarkAsDone}
                     handleMarkAsPending={this.handleMarkAsPending} />

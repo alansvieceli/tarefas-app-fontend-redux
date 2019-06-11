@@ -1,8 +1,10 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
 import Grid from '../template/grid'
 import IconButton from '../template/iconButton'
 
-export default props => {
+const tarefasForm = props => {
 
     const keyHandle = (e) => {
         if (e.key === 'Enter'){
@@ -30,3 +32,9 @@ export default props => {
         </div>
     )
 }
+
+
+const mapStateToProps = state => ({descricao: state.tarefa.descricao})
+
+//padrão de projeto, decorator
+export default connect(mapStateToProps)(tarefasForm)

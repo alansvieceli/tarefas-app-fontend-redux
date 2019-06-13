@@ -18,12 +18,10 @@ export const search = () => {
 }
 
 export const add = (descricao) => {
-    const request = axios.post(URL, {descricao});
-    //ou
-    //const request = axios.post(url, {descricao: descricao});
 
-    return {
-        type: 'TAREFAS_ADICIONADA',
-        payload: request
+    return dispatch => {
+        axios.post(URL, {descricao})  //ou axios.post(url, {descricao: descricao});
+            .then(resp => dispatch({type: 'TAREFAS_ADICIONADA', payload: resp.data}))
+            .then(resp => dispatch(search()))
     }
 }

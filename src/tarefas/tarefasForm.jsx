@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import Grid from '../template/grid'
 import IconButton from '../template/iconButton'
 
-import { changeDescricao, search } from './tarefasActions'
+import { changeDescricao, search, add } from './tarefasActions'
 
 
 class tarefasForm extends Component {
@@ -15,8 +15,10 @@ class tarefasForm extends Component {
     }
 
     keyHandle(e) {
-        if (e.key === 'Enter'){
-            e.shiftKey ? this.props.handleSearch() : this.props.handleAdd()
+        const { add, search, descricao} = this.props; //Extrai de props
+
+        if (e.key === 'Enter'){            
+            e.shiftKey ? search() : add(descricao)
         } else 
         if (e.key === 'Escape') {
             this.props.handleClear();
@@ -28,6 +30,8 @@ class tarefasForm extends Component {
     }
 
     render(){
+        const { add, search, descricao} = this.props; //Extrai de props
+
         return (
             <div role='form' className='todoForm'>
             <Grid cols="12 9 10">
@@ -38,8 +42,8 @@ class tarefasForm extends Component {
                     value={this.props.descricao}/>                
             </Grid>
             <Grid cols="12 3 2">
-            <IconButton style='primary' icon='plus' onClick={this.props.handleAdd}/>
-            <IconButton style='info' icon='search' onClick={this.props.handleSearch}/>
+            <IconButton style='primary' icon='plus' onClick={() => add(descricao)}/>
+            <IconButton style='info' icon='search' onClick={() => search()}/>
             <IconButton style='default' icon='close' onClick={this.props.handleClear}/>
             </Grid>
         </div>
@@ -48,7 +52,7 @@ class tarefasForm extends Component {
 }
 
 const mapStateToProps = state => ({descricao: state.tarefa.descricao})
-const mapDispatchToProps = dispatch => bindActionCreators({changeDescricao, search} , dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({changeDescricao, search, add} , dispatch)
 
 //padrão de projeto, decorator
 export default connect(mapStateToProps, mapDispatchToProps)(tarefasForm)

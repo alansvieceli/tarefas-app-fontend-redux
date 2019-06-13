@@ -16,3 +16,14 @@ export const search = () => {
     }
     
 }
+
+export const add = (descricao) => {
+    const request = axios.post(URL, {descricao});
+    //ou
+    //const request = axios.post(url, {descricao: descricao});
+
+    return {
+        type: 'TAREFAS_ADICIONADA',
+        payload: request
+    }
+}

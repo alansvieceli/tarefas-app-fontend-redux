@@ -9,6 +9,8 @@ export default (state = INITIAL_STATE, action) => {
             return {...state, descricao: action.payload}
         case 'TAREFAS_PESQUISADA':
             return {...state, lista: action.payload.data}
+        case 'TAREFAS_ADICIONADA':
+            return {...state, descricao: ''}
         default:
             return state
     }

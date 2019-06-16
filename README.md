@@ -6,3 +6,13 @@ npm i --save-dev redux-multi@0.1.12   <- executa um array de aciton, em paralelo
 npm i --save-dev redux-thunk@2.2.0    <- 
 
 Redux DevTools (Chrome)
+
+redux-promise
+
+redux-multi
+
+tarefasActions.js > clear
+
+redux-thunk
+
+tarefasActions.js > markAsDone e os outros

@@ -8,20 +8,21 @@ export const changeDescricao = (e) => ({
 })
 
 export const search = () => {
-    const request = axios.get(`${URL}?sort=-criacao` );
 
-    return {
-        type: 'TAREFAS_PESQUISADA',
-        payload: request
+    return (dispatch, getState) => {
+        const descricao = getState().tarefa.descricao;
+        const search = descricao ? `&descricao__regex=/${descricao}/` : ''
+        const request = axios.get(`${URL}?sort=-criacao${search}` )
+            .then(resp => dispatch({type: 'TAREFAS_PESQUISADA', payload: resp.data}))
     }
-    
+
 }
 
 export const add = (descricao) => {
 
     return dispatch => {
         axios.post(URL, {descricao})  //ou axios.post(url, {descricao: descricao});
-            .then(resp => dispatch({type: 'TAREFAS_ADICIONADA', payload: resp.data}))
+            .then(resp => dispatch(clear()))
             .then(resp => dispatch(search()))
     }
 }
@@ -40,9 +41,14 @@ export const markAsPendiing = (tarefa) => {
             .then(resp => dispatch(search()))
     }
 }
+
 export const remove = (tarefa) => {
     return dispatch => {
         axios.delete(`${URL}/${tarefa._id}`)
             .then(resp => dispatch(search()))
     }
+}
+
+export const clear = () => {
+    return [{type: 'TAREFAS_CLEAR'}, search()]
 }

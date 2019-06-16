@@ -5,7 +5,7 @@ import { bindActionCreators } from 'redux'
 import Grid from '../template/grid'
 import IconButton from '../template/iconButton'
 
-import { changeDescricao, search, add } from './tarefasActions'
+import { changeDescricao, search, add, clear } from './tarefasActions'
 
 
 class tarefasForm extends Component {
@@ -15,13 +15,13 @@ class tarefasForm extends Component {
     }
 
     keyHandle(e) {
-        const { add, search, descricao} = this.props; //Extrai de props
+        const { add, search, descricao, clear} = this.props; //Extrai de props
 
         if (e.key === 'Enter'){            
             e.shiftKey ? search() : add(descricao)
         } else 
         if (e.key === 'Escape') {
-            this.props.handleClear();
+            clear();
         }
     }
 
@@ -43,8 +43,8 @@ class tarefasForm extends Component {
             </Grid>
             <Grid cols="12 3 2">
             <IconButton style='primary' icon='plus' onClick={() => add(descricao)}/>
-            <IconButton style='info' icon='search' onClick={() => search()}/>
-            <IconButton style='default' icon='close' onClick={this.props.handleClear}/>
+            <IconButton style='info' icon='search' onClick={this.props.search}/>
+            <IconButton style='default' icon='close' onClick={this.props.clear}/>
             </Grid>
         </div>
         );
@@ -52,7 +52,7 @@ class tarefasForm extends Component {
 }
 
 const mapStateToProps = state => ({descricao: state.tarefa.descricao})
-const mapDispatchToProps = dispatch => bindActionCreators({changeDescricao, search, add} , dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({changeDescricao, search, add, clear} , dispatch)
 
 //padrão de projeto, decorator
 export default connect(mapStateToProps, mapDispatchToProps)(tarefasForm)

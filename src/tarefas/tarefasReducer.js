@@ -6,11 +6,11 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch(action.type){
         case 'ALTEROU_DESCRICAO':
-            return {...state, descricao: action.payload}
+            return {...state, descricao: action.payload }
         case 'TAREFAS_PESQUISADA':
-            return {...state, lista: action.payload.data}
-        case 'TAREFAS_ADICIONADA':
-            return {...state, descricao: ''}
+            return {...state, lista: action.payload }
+        case 'TAREFAS_CLEAR':
+            return {...state, descricao: '' }
         default:
             return state
     }

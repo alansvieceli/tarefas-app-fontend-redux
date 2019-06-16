@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 
 import IconButton from '../template/iconButton'
-import { markAsDone, markAsPendiing } from './tarefasActions'
+import { markAsDone, markAsPendiing, remove } from './tarefasActions'
 
 
 const tarefasLista = props => {
@@ -20,7 +20,7 @@ const tarefasLista = props => {
                     <IconButton style='warning' icon='undo' hide={!tarefa.finalizada} 
                         onClick={() => props.markAsPendiing(tarefa)}></IconButton>
                     <IconButton style='danger' icon='trash-o' hide={!tarefa.finalizada} 
-                        onClick={() => props.handleRemove(tarefa)}></IconButton>
+                        onClick={() => props.remove(tarefa)}></IconButton>
                 </td>
             </tr>
         ))
@@ -42,7 +42,7 @@ const tarefasLista = props => {
 }
 
 const mapStateToProps = state => ({lista: state.tarefa.lista})
-const mapDispatchToProps = dispatch => bindActionCreators({markAsDone, markAsPendiing} , dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators({markAsDone, markAsPendiing, remove} , dispatch)
 
 //padrão de projeto, decorator
 export default connect(mapStateToProps, mapDispatchToProps)(tarefasLista)

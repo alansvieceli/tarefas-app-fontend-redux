@@ -12,7 +12,6 @@ export default class Tarefa extends Component {
     constructor(props){
         super(props);
         this.state = {descricao: '', lista: []};
-        this.handleRemove = this.handleRemove.bind(this);
         this.handleSearch = this.handleSearch.bind(this);
         this.handleClear = this.handleClear.bind(this);
 
@@ -30,11 +29,6 @@ export default class Tarefa extends Component {
             .then((resp) => this.setState({...this.state, descricao, lista: resp.data}));
     }
 
-    handleRemove(tarefa){
-        axios.delete(`${URL}/${tarefa._id}`)
-            .then((resp) => this.refresh(this.state.descricao));
-    }
-
     handleSearch(){
         this.refresh(this.state.descricao);
     }
@@ -48,7 +42,6 @@ export default class Tarefa extends Component {
             <div>
                 <PageHeader name="Tarefas" small="Cadastro"/>
                 <TarefasForm 
-                    descricao={this.state.descricao}                    
                     handleClear={this.handleClear} />
                 <TarefasLista                     
                     handleRemove={this.handleRemove} />

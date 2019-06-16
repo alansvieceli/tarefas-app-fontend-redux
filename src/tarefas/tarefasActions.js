@@ -40,3 +40,9 @@ export const markAsPendiing = (tarefa) => {
             .then(resp => dispatch(search()))
     }
 }
+export const remove = (tarefa) => {
+    return dispatch => {
+        axios.delete(`${URL}/${tarefa._id}`)
+            .then(resp => dispatch(search()))
+    }
+}

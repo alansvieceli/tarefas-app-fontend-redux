@@ -25,3 +25,18 @@ export const add = (descricao) => {
             .then(resp => dispatch(search()))
     }
 }
+
+export const markAsDone = (tarefa) => {
+    return dispatch => {
+        axios.put(`${URL}/${tarefa._id}`, { ...tarefa, finalizada: true})
+            .then(resp => dispatch(search()))
+    }
+}
+
+
+export const markAsPendiing = (tarefa) => {
+    return dispatch => {
+        axios.put(`${URL}/${tarefa._id}`, { ...tarefa, finalizada: false})
+            .then(resp => dispatch(search()))
+    }
+}
